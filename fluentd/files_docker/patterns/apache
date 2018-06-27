@@ -1,0 +1,2 @@
+XCOMMONAPACHELOG ?(IPORHOST:hostname) %{IPORHOST}(, %{IPORHOST:client})?(, %{IPORHOST})?(, %{IPORHOST})?(, %{IPORHOST})? - - \[%{HTTPDATE:log_timestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER})?|%{DATA:rawrequest})" %{NUMBER:response} (?:%{NUMBER:bytes:int}|-)
+XCOMBINEDAPACHELOG %{XCOMMONAPACHELOG} %{QS:referrer} %{QS:agent}

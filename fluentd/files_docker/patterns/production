@@ -1,0 +1,24 @@
+ALPHA [a-zA-Z]+
+ALPHANUM [a-zA-Z0-9]+
+ID [a-zA-Z0-9-]+
+ACTION [a-zA-Z0-9_-]+
+WIDGETNAME [a-zA-Z0-9._-|]*
+PRODUCTIONBASE App %{NUMBER} stdout: SHOTGUN_APP: %{TIMESTAMP_ISO8601:log_timestamp} %{LOGLEVEL:loglevel} %{HOSTNAME:sg_host} rails\[%{NUMBER:process}\]:
+PROD_CRUD CRUD.%{HOSTNAME:crud_op}: %{NUMBER:duration:float}ms( db=%{ACTION})?( shotgun_version="%{HOSTNAME:sg_version}")?( shotgun_build=%{BASE16NUM:sg_build})?( request_id=%{BASE16NUM:request_id})?( page_load_id=%{ACTION:page_load_id})?( page_id=%{NUMBER:page_id})?( widget=%{WIDGETNAME:widget})?( api_method=%{WORD:api_method})?( ?(user|api_user)=%{USERNAME:user})?( -- {\"request_type\":\"%{WORD}\",\"type\":\"%{WORD:table}\")?
+PROD_CTRLER %{ACTION:controller}Controller.%{ACTION:action}(.%{ACTION:sub_action})?: %{NUMBER:duration:float}ms( db=%{ACTION})?( request_id=%{BASE16NUM:request_id})?( method=%{WORD:verb})?( status=%{NUMBER:response})?( uri=%{URIPATHPARAM})?( remote_ip=%{IPORHOST:client})?( session_id=%{BASE16NUM:session})?( page_load_id=%{ACTION:page_load_id})?( user_agent="%{DATA}")?( shotgun_version="%{HOSTNAME:sg_version}")?( shotgun_build=%{BASE16NUM:sg_build})?( db_time=%{NUMBER:db_duration:float}ms)?( query_count=%{NUMBER:query_count:integer})?( db_row_count=%{NUMBER:db_row_count:integer})?( request_cache_get=%{NUMBER})?( request_cache_miss=%{NUMBER})?( request_cache_set=%{NUMBER})?( memcached_get=%{NUMBER})?( memcached_miss=%{NUMBER})?( memcached_set=%{NUMBER})?( render_time=%{NUMBER}ms)?( user=%{USERNAME:user})?
+PROD_SQL SQL.%{ACTION:sql_action}(.%{ACTION:sql_sub_action})?: %{NUMBER:duration:float}ms( db=%{ACTION})?( shotgun_version="%{HOSTNAME:sg_version}")?( shotgun_build=%{BASE16NUM:sg_build})?( request_id=%{BASE16NUM:request_id})?( page_load_id=%{ACTION:page_load_id})?( page_id=%{NUMBER:page_id})?( widget=%{USERNAME:widget})?( user=%{USERNAME:user})?
+PROD_PASSENGER Passenger.request_queue: %{NUMBER:passenger_queue:float}ms %{GREEDYDATA}( db=%{ACTION:db})?( user=%{USERNAME:user})?
+PROD_PAGE Page.%{ACTION:page_name}: %{NUMBER:duration:float}ms( db=%{ACTION:db})?( shotgun_version="%{HOSTNAME:sg_version}")?( shotgun_build=%{BASE16NUM:sg_build})?( request_id=%{BASE16NUM:request_id})?( user=%{USERNAME:user})?
+PROD_REDIRECT Redirected to https://%{IPORHOST:redirect_host}%{PATH:redirect_path}(\?%{NOTSPACE})?( user=%{USERNAME:user})?
+PROD_SCHEMA_GEN %{NOTSPACE} GENERATING schema took %{NUMBER:schema_gen_seconds:float}s %{NOTSPACE}( user=%{USERNAME:user})?
+PROD_SCHEMA_ERR Ignoring invalid column \(CRUD Read\): %{HOSTNAME:invalid_col_read}( api_user=%{USERNAME:user})?
+PROD_STREAMING Streaming file: path=%{PATH:streaming_path}( user=%{USERNAME:user})?
+PROD_MEMCACHED_TYPE cache_type=%{ACTION:cache_type} value=%{ALPHA:cache_value} %{GREEDYDATA:cache_message}
+PROD_MEMCACHED_USER user=%{USERNAME:cache_user} %{GREEDYDATA:cache_message}
+PROD_MEMCACHED_HIT Memcached.%{ACTION:cache_hit}.hit: %{NUMBER:duration:float}ms db=%{ACTION:db} shotgun_version="%{HOSTNAME:sg_version}"( request_id=%{ALPHANUM:request_id})?( page_load_id=%{ID:page_load_id})?( user=%{USERNAME:user})?
+PROD_MEMCACHED_MISS Memcached.get.miss: key=%{ACTION:cache_miss} user=%{USERNAME:user}
+PROD_MEMCACHED_MSG Memcached: (%{PROD_MEMCACHED_TYPE}|%{PROD_MEMCACHED_USER})
+PROD_MEMCACHED (%{PROD_MEMCACHED_MSG}|%{PROD_MEMCACHED_HIT}|%{PROD_MEMCACHED_MISS})
+PROD_UNKNOWN %{GREEDYDATA:unknown}
+PRODUCTIONLOGLINE %{PRODUCTIONBASE} (?:%{PROD_CRUD}|%{PROD_CTRLER}|%{PROD_SQL}|%{PROD_PASSENGER}|%{PROD_PAGE}|%{PROD_REDIRECT}|%{PROD_SCHEMA_GEN}|%{PROD_SCHEMA_ERR}|%{PROD_STREAMING}|%{PROD_MEMCACHED}|%{PROD_UNKNOWN})
+PRODUCTIONLOG %{PRODUCTIONLOGLINE:message}
