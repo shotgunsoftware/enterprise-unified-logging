@@ -1,5 +1,3 @@
-:warning: This repository is archived and is kept for historic purposes only. The new repository is available [here](https://github.com/shotgunsoftware/enterprise-unified-logging) :warning:
-
 # Enterprise Unified Logging
 
 This repository contains example configurations for running an Elasticsearch stack to monitor and log Shotgun Enterprise. The visualizations and dashboards provided are examples of what could be useful for monitoring Shotgun Enterprise, clients may choose to modify the configuration as needed.
