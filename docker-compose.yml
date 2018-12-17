@@ -8,6 +8,9 @@ services:
       - data_es:/usr/share/elasticsearch/data
     ulimits:
       memlock: -1
+    environment:
+      - "transport.host=127.0.0.1"
+      - "xpack.security.enabled=false"
 
   kibana:
     build: ./kibana
