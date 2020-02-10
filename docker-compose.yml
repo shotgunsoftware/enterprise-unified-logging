@@ -1,6 +1,6 @@
 version: '2'
 services:
-  elasticsearch:
+  elasticsearch-sg:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
     ports:
       - "9200:9200"
@@ -17,17 +17,20 @@ services:
     ports:
       - "5601:5601"
     links:
-      - elasticsearch
+      - elasticsearch-sg
     volumes:
       - ./kibana/files_docker/provision.d:/etc/kibana/provision.d:ro
       - data_kb:/usr/share/kibana/data
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch-sg:9200
+#      - ELASTICSEARCH_HOST=elasticsearch-sg
 
   fluentd:
     build: ./fluentd
     ports:
       - "24224:24224"
     links:
-      - elasticsearch
+      - elasticsearch-sg
     volumes:
       - ./fluentd/files_docker/fluent.conf:/fluentd/etc/fluent.conf:ro
       - ./logs:/var/log/shotgun
