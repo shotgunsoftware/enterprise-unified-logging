@@ -1,6 +1,6 @@
 # Enterprise Unified Logging
 
-This repository contains example configurations for running an Elasticsearch stack to monitor and log Shotgun Enterprise. The visualizations and dashboards provided are examples of what could be useful for monitoring Shotgun Enterprise, clients may choose to modify the configuration as needed.
+This repository contains example configurations for running an Elasticsearch stack to monitor and log ShotGrid Enterprise. The visualizations and dashboards provided are examples of what could be useful for monitoring Shotgun Enterprise, clients may choose to modify the configuration as needed.
 
 The solution uses [Fluentd](https://www.fluentd.org/) as the data collector between the Shotgun application and the Elasticsearch database.
 
