@@ -2,7 +2,7 @@
 
 This repository contains example configurations for running an Elasticsearch stack to monitor and log ShotGrid Enterprise. The visualizations and dashboards provided are examples of what could be useful for monitoring ShotGrid Enterprise, clients may choose to modify the configuration as needed.
 
-The solution uses [Fluentd](https://www.fluentd.org/) as the data collector between the Shotgun application and the Elasticsearch database.
+The solution uses [Fluentd](https://www.fluentd.org/) as the data collector between the ShotGrid application and the Elasticsearch database.
 
 # Getting started
 
@@ -14,7 +14,7 @@ Then start Fluentd and Elasticsearch along with Kibana.
 
     docker-compose up
     
-Finally, you will need to change the Shotgun application logging driver in its `docker-compose.yml` file from `json-file` to `fluentd`:
+Finally, you will need to change the ShotGrid application logging driver in its `docker-compose.yml` file from `json-file` to `fluentd`:
 
 Remove 
 ```yaml
@@ -42,7 +42,7 @@ logging:
 
 Logs can be access via Kibana at [http://localhost:5601/](http://localhost:5601/)
 
-From there you can create your indexes (ex: `shotgun_logs-*` already created by default) and then query Elasticsearch.
+From there you can create your indexes (ex: `shotgrid_logs-*` already created by default) and then query Elasticsearch.
 
 ### Saved Objects
 

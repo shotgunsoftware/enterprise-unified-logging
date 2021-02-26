@@ -30,7 +30,7 @@ services:
       - elasticsearch
     volumes:
       - ./fluentd/files_docker/fluent.conf:/fluentd/etc/fluent.conf:ro
-      - ./logs:/var/log/shotgun
+      - ./logs:/var/log/shotgrid
 
 volumes:
   data_es:
