@@ -11,8 +11,8 @@ RUN apk add --update --virtual .build-deps \
  && rm -rf /var/cache/apk/* \
     /home/fluent/.gem/ruby/2.3.0/cache/*.gem
 
-RUN mkdir -p /var/log/shotgun \
-    && chmod 666 /var/log/shotgun
+RUN mkdir -p /var/log/shotgrid \
+    && chmod 666 /var/log/shotgrid
 
 COPY files_docker/patterns /opt/fluentd/patterns/
 COPY files_docker/fluent.conf /fluentd/etc/fluent.conf
