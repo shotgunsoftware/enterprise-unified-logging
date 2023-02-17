@@ -1,7 +1,7 @@
-version: '2'
+version: '3'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.1
     ports:
       - "9200:9200"
     volumes:
@@ -19,7 +19,7 @@ services:
     links:
       - elasticsearch
     volumes:
-      - ./kibana/files_docker/provision.d:/etc/kibana/provision.d:ro
+      - ./kibana/saved_objects:/var/tmp/saved_objects:ro
       - data_kb:/usr/share/kibana/data
 
   fluentd:
@@ -30,7 +30,7 @@ services:
       - elasticsearch
     volumes:
       - ./fluentd/files_docker/fluent.conf:/fluentd/etc/fluent.conf:ro
-      - ./logs:/var/log/shotgrid
+#      - ./logs:/var/log/shotgrid
 
 volumes:
   data_es:
