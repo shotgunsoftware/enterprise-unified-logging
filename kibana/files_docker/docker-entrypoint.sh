@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#response=""
 while [[ $response != "200" ]]; do
   echo "Import Saved Objects: Waiting for Kibana..."
   sleep 5
