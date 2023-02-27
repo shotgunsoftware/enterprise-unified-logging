@@ -34,6 +34,7 @@ logging:
   options:
     fluentd-address: "<fluentd_server_address>:24224"
     tag: "sg.app.{{.ID}}"
+    mode: "non-blocking"
 ```
 
 # How to access logs
@@ -46,9 +47,9 @@ From there you can create your indexes (ex: `shotgrid_logs-*` already created by
 
 ### Saved Objects
 
-Customizations (visualizations, dashbaords, etc) can be saved. Please refer to [Kibana documentation](https://www.elastic.co/guide/en/kibana/current/managing-saved-objects.html) on how to manage saved objects. However, once changes are made in Kibana they persist as long as the database is not removed.
+Customizations (visualizations, dashboards, etc) can be saved. Please refer to [Kibana documentation](https://www.elastic.co/guide/en/kibana/current/managing-saved-objects.html) on how to manage saved objects. However, once changes are made in Kibana they persist as long as the database is not removed.
 
-Saved objects can be provisioned by default by modifying the appropriate json file in the `kibana/files_docker/provision.d/` directory.
+Saved objects can be provisioned by default in a new stack by modifying the appropriate ndjson files in the `kibana/saved_objects/` directory.
 
 ## Log files
 
@@ -60,7 +61,7 @@ Logs are also available (not by default) in json file in the `logs/` directory.
 
 All the configuration takes place in the `fluentd/files_docker/fluent.conf` file.
 
-Further details on configuring `fluentd` is availabe in the [config-file documentation](https://docs.fluentd.org/v1.0/articles/config-file).
+Further details on configuring `fluentd` are availabe in the [config-file documentation](https://docs.fluentd.org/configuration/config-file).
 
 ## Plugins
 

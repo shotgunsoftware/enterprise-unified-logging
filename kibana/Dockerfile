@@ -1,8 +1,14 @@
-FROM docker.elastic.co/kibana/kibana:6.2.4
+FROM docker.elastic.co/kibana/kibana:8.6.1
+
+USER root
+
+RUN apt-get update && \
+    apt-get -y install jq && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY files_docker/docker-entrypoint.sh /docker-entrypoint.sh
-COPY files_docker/provision.sh /provision.sh
-COPY files_docker/provision.d /etc/kibana/provision.d
+
+USER kibana
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
