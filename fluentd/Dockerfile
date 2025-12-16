@@ -1,8 +1,9 @@
-FROM fluent/fluentd:v1.15.3-debian-1.2
+FROM fluent/fluentd:v1.19.0-debian-1.0
 
 USER root
 
-RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-document", "--version", "5.2.4"]
+RUN ["gem", "install", "elasticsearch", "--no-document", "--version", "8.16.0"]
+RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-document", "--version", "6.0"]
 RUN ["fluent-gem", "install", "fluent-plugin-grok-parser", "--version", "2.6.2"]
 RUN mkdir -p /var/log/shotgrid \
     && chmod 666 /var/log/shotgrid
